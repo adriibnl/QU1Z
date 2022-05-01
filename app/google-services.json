@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "904301397662",
+    "project_id": "tfg-final-60b87",
+    "storage_bucket": "tfg-final-60b87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904301397662:android:2be6dcceaf13ddc433dd8f",
+        "android_client_info": {
+          "package_name": "com.example.tfgfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904301397662-ttfbp2rvgk9ppqcksk4e8sl633kj9nqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLad3BJUiIzn4fVGbgGtd4SGeNtfi940A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904301397662-ttfbp2rvgk9ppqcksk4e8sl633kj9nqs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
