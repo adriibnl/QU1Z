@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tfgfinal.DAO.UsuariosDAO;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Button logOutBt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        UsuariosDAO DaoUsuario = new UsuariosDAO();
+        if (!DaoUsuario.checkRegisteredUser(mAuth.getCurrentUser().getUid())) {
+            Intent intent = new Intent(this,RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
