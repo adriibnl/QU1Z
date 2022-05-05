@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.FechaCreacion = Date.valueOf(LocalDate.now().toString());
                 user.IdUser =  mAuth.getCurrentUser().getUid();
                 user.Mail = mAuth.getCurrentUser().getEmail();
-                userDAO.addUsuario(user);
+                userDAO.AddUsuario(user);
                 finish();
             }
         });

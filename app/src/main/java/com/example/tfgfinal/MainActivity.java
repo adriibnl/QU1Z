@@ -16,13 +16,22 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Button logOutBt;
-
+    Button CreateBt;
+    Button misCuestionariosBT;
+    Button hacerCuestionarioBT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         logOutBt = findViewById(R.id.logOutBt);
+        CreateBt = findViewById(R.id.CreateBT);
+        misCuestionariosBT = findViewById(R.id.MisCuestionariosMainBT);
+        hacerCuestionarioBT = findViewById(R.id.mainHacerCuestionariosBt);
+        Intent createIntent = new Intent(this,CreateActivity.class);
+        Intent misCuestionariosIntent = new Intent(this,MisCuestionariosActivity.class);
+        Intent hacerCuestionariosIntent = new Intent(this,AllCuestionariosActivity.class);
+        //region ClickListeners
         logOutBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,8 +41,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        CreateBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(createIntent);
+            }
+        });
+        misCuestionariosBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(misCuestionariosIntent);
+            }
+        });
+        hacerCuestionarioBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(hacerCuestionariosIntent);
+            }
+        });
+        //endregion
         UsuariosDAO DaoUsuario = new UsuariosDAO();
-        if (!DaoUsuario.checkRegisteredUser(mAuth.getCurrentUser().getUid())) {
+        if (!DaoUsuario.CheckRegisteredUser(mAuth.getCurrentUser().getUid())) {
             Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
         }

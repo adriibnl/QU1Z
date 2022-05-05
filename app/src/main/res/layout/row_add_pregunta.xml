@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:gravity="center"
+        >
+        <EditText
+            android:id="@+id/enunciadoET"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:background="#AEA9A9"
+            android:hint="Enunciado"
+            android:paddingRight="2dp"
+            ></EditText>
+        <Spinner
+            android:id="@+id/tipoPreguntaSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:background="#AEA9A9"
+            ></Spinner>
+    </LinearLayout>
+</LinearLayout>

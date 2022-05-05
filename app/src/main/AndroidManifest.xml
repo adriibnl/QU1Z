@@ -13,6 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFGFINAL">
         <activity
+            android:name=".AllCuestionariosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoCuestionarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PreguntasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MisCuestionariosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
