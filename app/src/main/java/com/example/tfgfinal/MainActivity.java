@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button CreateBt;
     Button misCuestionariosBT;
     Button hacerCuestionarioBT;
+    Button verRespuestasBT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         CreateBt = findViewById(R.id.CreateBT);
         misCuestionariosBT = findViewById(R.id.MisCuestionariosMainBT);
         hacerCuestionarioBT = findViewById(R.id.mainHacerCuestionariosBt);
+        verRespuestasBT = findViewById(R.id.verRespuestasMainBt);
         Intent createIntent = new Intent(this,CreateActivity.class);
         Intent misCuestionariosIntent = new Intent(this,MisCuestionariosActivity.class);
         Intent hacerCuestionariosIntent = new Intent(this,AllCuestionariosActivity.class);
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         misCuestionariosBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                misCuestionariosIntent.putExtra("verRespuestas",false);
                 startActivity(misCuestionariosIntent);
             }
         });
@@ -58,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(hacerCuestionariosIntent);
+            }
+        });
+        verRespuestasBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             misCuestionariosIntent.putExtra("verRespuestas",true);
+             startActivity(misCuestionariosIntent);
             }
         });
         //endregion

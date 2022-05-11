@@ -23,5 +23,6 @@
         android:id="@+id/entregarCuestionarioBt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="finalizar"></Button>
+        android:text="finalizar"
+        android:onClick="GuardarRespuestas"></Button>
 </LinearLayout>

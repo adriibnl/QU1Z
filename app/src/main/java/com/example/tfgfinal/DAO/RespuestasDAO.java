@@ -6,6 +6,7 @@ import com.example.tfgfinal.Models.Pregunta;
 import com.example.tfgfinal.Models.Respuesta;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,12 +21,15 @@ public class RespuestasDAO {
 
 
     public void AddRespuesta(Respuesta c) {
+
         try{
             PreparedStatement stat = con.prepareStatement("INSERT INTO RESPUESTAS(IDPREGUNTA," +
-                    "IDCUESTIONARIO,TEXTO) VALUES (?,?,?)");
+                    "IDCUESTIONARIO,TEXTO,IDUSUARIO,FECHA) VALUES (?,?,?,?,?)");
             stat.setInt(1,c.IdPregunta);
             stat.setInt(2,c.IdCuestionario);
             stat.setString(3,c.Texto);
+            stat.setInt(4,c.IdUsuario);
+            stat.setDate(5, (Date) c.Fecha);
             stat.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -41,6 +45,7 @@ public class RespuestasDAO {
             C.IdCuestionario = rs.getInt(3);
             C.IdPregunta = rs.getInt(2);
             C.Texto   = rs.getString(4);
+            C.IdUsuario = rs.getInt(5);
         } catch (SQLException e) {}
         return C;
     }
@@ -59,6 +64,7 @@ public class RespuestasDAO {
                 C.IdPregunta = rs.getInt(2);
                 C.IdCuestionario = rs.getInt(3);
                 C.Texto = rs.getString(4);
+                C.IdUsuario = rs.getInt(5);
                 lista.add(C);
             }
             return lista;
@@ -83,6 +89,7 @@ public class RespuestasDAO {
                 C.IdPregunta = rs.getInt(2);
                 C.IdCuestionario = rs.getInt(3);
                 C.Texto = rs.getString(4);
+                C.IdUsuario = rs.getInt(5);
                 lista.add(C);
             }
             return lista;
@@ -93,6 +100,70 @@ public class RespuestasDAO {
 
     }
 
+    public boolean CheckRespuestasFromUser(int idUser,int idCuestionario) {
+        try {
+            List<Respuesta> lista = new ArrayList<Respuesta>();
+
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM RESPUESTAS where idCuestionario ='" + idCuestionario +
+                            "' and idUsuario = '" + idUser + "'" );
+            if(rs.next()) {return true;}
+            else {return false;}
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+        return false;
+    }
+
+    public List<Respuesta> GetAllRespuestasFromUserAndCuestionario(int idUser,int idCuestionario) {
+        try {
+            List<Respuesta> lista = new ArrayList<Respuesta>();
+
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM RESPUESTAS where idCuestionario ='" + idCuestionario +
+                            "' and idUsuario = '" + idUser + "'" );
+            while (rs.next()) {
+                Respuesta C = new Respuesta();
+                C.Id = rs.getInt(1);
+                C.IdPregunta = rs.getInt(2);
+                C.IdCuestionario = rs.getInt(3);
+                C.Texto = rs.getString(4);
+                C.IdUsuario = rs.getInt(5);
+                lista.add(C);
+            }
+            return lista;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public Respuesta GetRespuestaFromUserAndPregunta(int idUser,int idPregunta) {
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM RESPUESTAS where idPregunta ='" + idPregunta +
+                            "' and idUsuario = '" + idUser + "'" );
+            rs.next();
+                Respuesta C = new Respuesta();
+                C.Id = rs.getInt(1);
+                C.IdPregunta = rs.getInt(2);
+                C.IdCuestionario = rs.getInt(3);
+                C.Texto = rs.getString(4);
+                C.IdUsuario = rs.getInt(5);
+
+
+            return C;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
 
 
     //region Tipo de preguntas

@@ -25,10 +25,10 @@
         android:text="Crear cuestionario"
         app:layout_constraintBottom_toTopOf="@+id/logOutBt"
         app:layout_constraintEnd_toEndOf="@+id/logOutBt"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/logOutBt"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.644" />
+        app:layout_constraintVertical_bias="0.636" />
 
     <Button
         android:id="@+id/MisCuestionariosMainBT"
@@ -47,7 +47,20 @@
         android:text="Hacer cuestionarios"
         app:layout_constraintBottom_toTopOf="@+id/CreateBT"
         app:layout_constraintEnd_toEndOf="@+id/CreateBT"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="@+id/CreateBT"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+    <Button
+        android:id="@+id/verRespuestasMainBt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Ver respuestas"
+        app:layout_constraintBottom_toTopOf="@+id/CreateBT"
+        app:layout_constraintEnd_toEndOf="@+id/mainHacerCuestionariosBt"
+        app:layout_constraintStart_toStartOf="@+id/mainHacerCuestionariosBt"
+        app:layout_constraintTop_toBottomOf="@+id/mainHacerCuestionariosBt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

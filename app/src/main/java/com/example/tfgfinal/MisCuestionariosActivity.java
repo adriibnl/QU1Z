@@ -25,12 +25,13 @@ public class MisCuestionariosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_cuestionarios);
+        boolean verRespuestas = getIntent().getExtras().getBoolean("verRespuestas");
         mAuth = FirebaseAuth.getInstance();
         int idCreador = uDAO.GetUsuarioByUserID(mAuth.getCurrentUser().getUid()).getId();
         List<Cuestionario> lista = cDAO.GetAllCuestionariosFromUser(idCreador);
         context = this;
         lv = findViewById(R.id.myQuizList);
-        lv.setAdapter(new CuestionarioListAdapter(this,lista));
+        lv.setAdapter(new CuestionarioListAdapter(this,lista,verRespuestas));
     }
 
 

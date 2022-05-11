@@ -32,6 +32,7 @@ public class PreguntasActivity extends AppCompatActivity {
         buttonSubmitPreguntas = findViewById(R.id.submitPreguntasBT);
         Bundle bundle = getIntent().getExtras();
         idCuestionario =getIntent().getExtras().getInt("IdCuestionario");
+        CargarPreguntas();
         //region ClickListeners
         buttonAddPreguntas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,25 @@ public class PreguntasActivity extends AppCompatActivity {
             String enunciado = enunciadoET.getText().toString();
             p.Tipo = tipo; p.Enunciado =enunciado; p.IdCuestionario = idCuestionario;
             preguntasDAO.AddPregunta(p);
+        }
+    }
+
+    public void CargarPreguntas() {
+        ArrayList<Pregunta> preguntasList = new ArrayList<Pregunta>();
+        for (Pregunta p:
+             preguntasDAO.GetAllPreguntasFromCuestionario(idCuestionario)) {
+            final View preguntaView = getLayoutInflater().inflate(R.layout.row_add_pregunta,
+                    null,false);
+            List<String> tiposPregunta= preguntasDAO.GetAllTipoPreguntas();
+            EditText enunciadoET = preguntaView.findViewById(R.id.enunciadoET);
+            Spinner spinner = preguntaView.findViewById(R.id.tipoPreguntaSpinner);
+            ArrayAdapter arrayAdapter = new ArrayAdapter(PreguntasActivity.this,R.layout.support_simple_spinner_dropdown_item,
+                    tiposPregunta);
+            spinner.setAdapter(arrayAdapter);
+            enunciadoET.setText(p.Enunciado);
+            spinner.setSelection(preguntasDAO.GetTipoByString(p.Tipo).id);
+            layoutlist.addView(preguntaView);
+            ViewList.add(preguntaView);
         }
     }
 }

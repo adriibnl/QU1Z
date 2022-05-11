@@ -2,6 +2,7 @@ package com.example.tfgfinal.DAO;
 
 import com.example.tfgfinal.Connection.ConSQL;
 import com.example.tfgfinal.Models.Cuestionario;
+import com.example.tfgfinal.Models.DDLModel;
 import com.example.tfgfinal.Models.Pregunta;
 import com.example.tfgfinal.Models.Respuesta;
 
@@ -111,5 +112,20 @@ public class PreguntasDAO {
         }
 
     }
+
+    public DDLModel GetTipoByString(String tipo) {
+        DDLModel C = new DDLModel();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM TIPOPREGUNTAS WHERE TIPOPREGUNTAS = '" +tipo+
+                            "'");
+            C.id = rs.getInt(1);
+            C.text = rs.getString(2);
+
+        } catch (SQLException e) {}
+        return C;
+    }
+
     //endregion
 }
