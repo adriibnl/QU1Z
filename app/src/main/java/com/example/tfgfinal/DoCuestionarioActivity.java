@@ -2,9 +2,13 @@ package com.example.tfgfinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -21,7 +25,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DoCuestionarioActivity extends AppCompatActivity {
@@ -62,20 +68,72 @@ int idCuestionario;
                 enunciadoTV.setEnabled(false);
             layoutlist.addView(preguntaView);
             ViewList.add(preguntaView);
-            if (p.Tipo.equals("Texto")) {
-                final View respuestaView =
-                        getLayoutInflater().inflate(R.layout.row_add_respuesta_edittext,
-                        null, false);
-                EditText respuestaET = respuestaView.findViewById(R.id.editTextRespuesta);
-                if (verRespuestas) {
-                    try{respuestaET.setEnabled(false);
-                        respuestaET.setText(rDAO.GetRespuestaFromUserAndPregunta(iduser,p.Id).Texto);
-                    } catch (Exception e) { e.printStackTrace();}
-                }
+            switch(p.Tipo) {
+                case "Texto" :
+                    final View respuestaViewEt =
+                            getLayoutInflater().inflate(R.layout.row_add_respuesta_edittext,
+                                    null, false);
+                    EditText respuestaET = respuestaViewEt.findViewById(R.id.editTextRespuesta);
+                    if (verRespuestas) {
+                        try{respuestaET.setEnabled(false);
+                            respuestaET.setText(rDAO.GetRespuestaFromUserAndPregunta(iduser,p.Id).Texto);
+                        } catch (Exception e) { e.printStackTrace();}
+                    }
 
-                layoutlist.addView(respuestaView);
-                ViewList.add(respuestaView);
+                    layoutlist.addView(respuestaViewEt);
+                    ViewList.add(respuestaViewEt);
+                    break;
+                case "CheckBox" :
+                    final View respuestaViewCb =
+                            getLayoutInflater().inflate(R.layout.row_add_respuesta_checkbox,
+                                    null, false);
+                    CheckBox respuestaCb = respuestaViewCb.findViewById(R.id.checkBoxRespuesta);
+                    if (verRespuestas) {
+                        try{respuestaCb.setEnabled(false);
+                            if (rDAO.GetRespuestaFromUserAndPregunta(iduser,p.Id).Texto.equals(
+                                    "true"))
+                            {respuestaCb.setChecked(true);}
+                            else {respuestaCb.setChecked(false);}
+                            respuestaCb.setText(p.Enunciado);
+                        } catch (Exception e) { e.printStackTrace();}
+                    }
+
+                    layoutlist.addView(respuestaViewCb);
+                    ViewList.add(respuestaViewCb);
+                    break;
+                case "Fechas" :
+                    final View respuestaViewDP =
+                            getLayoutInflater().inflate(R.layout.row_add_respuesta_date,
+                                    null, false);
+                    EditText respuestasDP = respuestaViewDP.findViewById(R.id.editTextDate);
+                    respuestasDP.setFocusable(false);
+                    Calendar c = Calendar.getInstance();
+                    int day = c.get(Calendar.DAY_OF_MONTH);
+                    int month = c.get(Calendar.MONTH);
+                    int year = c.get(Calendar.YEAR);
+
+                    DatePickerDialog dpd = new DatePickerDialog(DoCuestionarioActivity.this);
+                    dpd.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month,
+                                              int dayOfMonth) {
+                            respuestasDP.setText(dayOfMonth + "/" + (month+1) +"/" + year);
+                        }
+                    });
+                    respuestasDP.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dpd.show();
+                        }
+                    });
+                    if (layoutlist.indexOfChild(respuestaViewDP) != -1) {
+                        layoutlist.removeView(respuestaViewDP);
+                    }
+                    layoutlist.addView(respuestaViewDP);
+                    ViewList.add(respuestaViewDP);
+
             }
+
 
         }
         //region ClickListeners
@@ -88,20 +146,52 @@ int idCuestionario;
         if (!rDAO.CheckRespuestasFromUser(iduser,idCuestionario)) {
         for (View v:
                 ViewList) {
+            int f = 0;
             Respuesta p = new Respuesta();
             try {
-                EditText respuesta  = v.findViewById(R.id.editTextRespuesta);
-                String respuestString = respuesta.getText().toString();
-                //EditText enunciadoET = v.findViewById(R.id.respuestaEnunciadoET);
-                //String enunciado = enunciadoET.getText().toString();
-                int f = ViewList.indexOf(v);
-                p.Texto = respuestString; p.IdCuestionario =idCuestionario;p.IdPregunta =
-                        listPreguntas.get(contador).Id;
-                p.IdUsuario = iduser; p.Fecha = Date.valueOf(LocalDate.now().toString());
+                String type = view.getClass().getName();
 
-                rDAO.AddRespuesta(p);contador++;}
+                        EditText respuestaEt  = v.findViewById(R.id.editTextRespuesta);
+                        CheckBox respuestaCb  = v.findViewById(R.id.checkBoxRespuesta);
+                        EditText respuestaDt = v.findViewById(R.id.editTextDate);
+                        if (respuestaEt != null) {String respuestStringEt = respuestaEt.getText().toString();
+                            //EditText enunciadoET = v.findViewById(R.id.respuestaEnunciadoET);
+                            //String enunciado = enunciadoET.getText().toString();
+                            f = ViewList.indexOf(v);
+                            p.Texto = respuestStringEt; p.IdCuestionario =idCuestionario;p.IdPregunta =
+                                    listPreguntas.get(contador).Id;
+                            p.IdUsuario = iduser; p.Fecha = Date.valueOf(LocalDate.now().toString());
 
-             catch (Exception e) {e.printStackTrace();} } }
+                            rDAO.AddRespuesta(p);contador++;}
+
+                        if (respuestaCb != null) {//EditText enunciadoET = v.findViewById(R.id.respuestaEnunciadoET);
+                            //String enunciado = enunciadoET.getText().toString();
+                            Boolean respuestStringCb = respuestaCb.isChecked();
+                            f = ViewList.indexOf(v);
+                            p.Texto = respuestStringCb.toString(); p.IdCuestionario =idCuestionario;p.IdPregunta =
+                                    listPreguntas.get(contador).Id;
+                            p.IdUsuario = iduser; p.Fecha = Date.valueOf(LocalDate.now().toString());
+
+                            rDAO.AddRespuesta(p);contador++;}
+                        if (respuestaDt != null) {
+                            String respuestStringDt = respuestaDt.getText().toString();
+                            //EditText enunciadoET = v.findViewById(R.id.respuestaEnunciadoET);
+                            //String enunciado = enunciadoET.getText().toString();
+                            f = ViewList.indexOf(v);
+                            p.Texto = respuestStringDt; p.IdCuestionario =idCuestionario;p.IdPregunta =
+                                    listPreguntas.get(contador).Id;
+                            p.IdUsuario = iduser; p.Fecha = Date.valueOf(LocalDate.now().toString());
+
+                            rDAO.AddRespuesta(p);contador++;
+                        }
+
+
+
+                }
+
+
+             catch (Exception e) {
+                e.printStackTrace();} } }
 
 
         finish();

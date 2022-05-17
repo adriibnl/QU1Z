@@ -91,6 +91,21 @@ public class PreguntasDAO {
 
     }
 
+    public boolean CheckPregunta(Pregunta p) {
+        Pregunta C = new Pregunta();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM PREGUNTAS WHERE IDCUESTIONARIO = '" +p.IdCuestionario+
+                    "'and Enunciado = '" +p.Enunciado + "'");
+            if (rs.next()) {
+                return true;
+            }
+            else return false;
+        } catch (SQLException e) {}
+        return true;
+    }
+
 //endregion
 
     //region Tipo de preguntas
@@ -125,6 +140,38 @@ public class PreguntasDAO {
 
         } catch (SQLException e) {}
         return C;
+    }
+
+    public void SaveOpcion(int idPregunta,String Opcion) {
+        try{
+            PreparedStatement stat = con.prepareStatement("INSERT INTO ComboBoxOpciones" +
+                    "(IdPregunta," +
+                    "Opcion) VALUES (?,?)");
+            stat.setInt(1,idPregunta);
+            stat.setString(2,Opcion);
+            stat.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public List<String> GetAllOpcionesFromPregunta(int Id) {
+        try {
+            List<String> lista = new ArrayList<String>() {
+            };
+
+            Statement stat = con.createStatement();
+            ResultSet rs = stat.executeQuery("SELECT * FROM COMBOBOXOPCIONES");
+            while (rs.next()) {
+                String opciones = rs.getString(3);
+                lista.add(opciones);
+            }
+            return lista;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
     }
 
     //endregion
