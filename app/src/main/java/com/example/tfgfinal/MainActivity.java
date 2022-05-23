@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tfgfinal.DAO.UsuariosDAO;
@@ -15,21 +16,27 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    Button logOutBt;
-    Button CreateBt;
-    Button misCuestionariosBT;
-    Button hacerCuestionarioBT;
-    Button verRespuestasBT;
+    ImageView logOutBt;
+    ImageView CreateBt;
+    ImageView misCuestionariosBT;
+    ImageView hacerCuestionarioBT;
+    ImageView verRespuestasBT;
+    String userId;
+    ImageView pfpIV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+        userId = mAuth.getCurrentUser().getUid();
         logOutBt = findViewById(R.id.logOutBt);
         CreateBt = findViewById(R.id.CreateBT);
         misCuestionariosBT = findViewById(R.id.MisCuestionariosMainBT);
         hacerCuestionarioBT = findViewById(R.id.mainHacerCuestionariosBt);
         verRespuestasBT = findViewById(R.id.verRespuestasMainBt);
+        pfpIV = findViewById(R.id.fotoMainIv);
+        Intent perfilIntent = new Intent(this,UserPageActivity.class);
+        perfilIntent.putExtra("userId",userId);
         Intent createIntent = new Intent(this,CreateActivity.class);
         Intent misCuestionariosIntent = new Intent(this,MisCuestionariosActivity.class);
         Intent hacerCuestionariosIntent = new Intent(this,AllCuestionariosActivity.class);
@@ -68,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
              misCuestionariosIntent.putExtra("verRespuestas",true);
              startActivity(misCuestionariosIntent);
+            }
+        });
+        pfpIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(perfilIntent);
             }
         });
         //endregion

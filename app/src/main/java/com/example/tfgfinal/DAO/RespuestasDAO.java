@@ -165,6 +165,49 @@ public class RespuestasDAO {
 
     }
 
+    public int GetCuestionariosResueltosFromUser(int idUser) {
+        try {
+            Statement stat = con.createStatement();
+            int count = -1;
+            ResultSet rs =
+                    stat.executeQuery("SELECT idCuestionario FROM RESPUESTAS where idusuario ='" + idUser +
+                            "' group by idCuestionario order by idCuestionario" );
+            while (rs.next()){
+
+                count = rs.getRow();
+            }
+
+
+            return count;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    public int GetRespuestasDeMisCuestionarios(int idUser) {
+        try {
+            Statement stat = con.createStatement();
+            int count = -1;
+            ResultSet rs =
+                    stat.executeQuery("SELECT COUNT(RESPUESTAS.ID) FROM RESPUESTAS INNER JOIN " +
+                            "CUESTIONARIO ON RESPUESTAS.IDCUESTIONARIO = CUESTIONARIO.ID WHERE " +
+                            "CUESTIONARIO.IDCREADOR = '" +idUser +"' GROUP BY IDCUESTIONARIO" );
+            while (rs.next()){
+
+                count = rs.getRow();
+            }
+
+
+            return count;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -1;
+        }
+
+    }
+
 
     //region Tipo de preguntas
     public List<String> GetAllTipoPreguntas() {

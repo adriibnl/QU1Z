@@ -11,7 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TFGFINAL">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity
+            android:name=".UserPageActivity"
+            android:exported="false" />
         <activity
             android:name=".CuestionarioRespuestasListActivity"
             android:exported="false" />
