@@ -36,6 +36,7 @@ public class PreguntasActivity extends AppCompatActivity {
     Map<String,View> OpcionesMap = new HashMap<>();
     List<View> comboBoxListView = new ArrayList<View>();
     int idCuestionario;
+    int idUsuarioResuelto;
     LinearLayout popupLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class PreguntasActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         idCuestionario =getIntent().getExtras().getInt("IdCuestionario");
+        idUsuarioResuelto = getIntent().getExtras().getInt("IdUser");
         CargarPreguntas();
         //region ClickListeners
         buttonAddPreguntas.setOnClickListener(new View.OnClickListener() {

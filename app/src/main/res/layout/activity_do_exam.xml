@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoExamActivity">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="163dp"
+        android:src="@drawable/portrait_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></com.mikhaellopez.circularimageview.CircularImageView>
+
+    <LinearLayout
+        android:id="@+id/Opcion4Layout"
+        android:layout_width="208dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintTop_toBottomOf="@+id/Opcion3Layout">
+
+        <TextView
+            android:id="@+id/Opcion4TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Opcion4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Opcion3Layout"
+        android:layout_width="208dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="52dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintTop_toBottomOf="@+id/Opcion2Layout"
+        android:gravity="center"
+        android:background="@drawable/border">
+        <TextView
+            android:id="@+id/Opcion3TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opcion3"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Opcion2Layout"
+        android:layout_width="208dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="52dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintTop_toBottomOf="@+id/Opcion1Layout"
+        android:gravity="center"
+        android:background="@drawable/border">
+        <TextView
+            android:id="@+id/Opcion2TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Opcion2"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/enunciadoDoExamenTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="166dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="167dp"
+        android:fontFamily="sans-serif-black"
+        android:text="ENUNCIADO"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/Opcion1Layout"
+        android:layout_width="208dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/enunciadoDoExamenTV"
+        app:layout_constraintTop_toBottomOf="@+id/enunciadoDoExamenTV">
+
+        <TextView
+            android:id="@+id/Opcion1TV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Opcion1" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

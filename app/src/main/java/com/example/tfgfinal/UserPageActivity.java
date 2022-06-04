@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -43,11 +44,19 @@ public class UserPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_page);
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference fileRef = storageReference.child("users/"+ mAuth.getCurrentUser().getUid()+
+                "/profile.jpg");
         NombreTV = findViewById(R.id.NombrePerfilTv);
         CuestionariosCompletadosTV = findViewById(R.id.cuestionariosCompletadosPerfilTV);
         RespuestasATusCuestionariosTV = findViewById(R.id.RespuestasACuestionariosPerfilTv);
         CuestionariosCreadosTV = findViewById(R.id.CuestionariosCreadosPerfilTv);
         pfp = findViewById(R.id.pfpImageView);
+        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.with(UserPageActivity.this).load(uri).into(pfp);
+            }
+        });
         String userId = getIntent().getStringExtra("userId");
         int idUsuario = Udao.GetUsuarioByUserID(userId).Id;
         String userName = Udao.GetUsuarioByUserID(userId).Username;
@@ -85,7 +94,9 @@ public class UserPageActivity extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri imageUri) {
 
-        StorageReference fileRef = storageReference.child("profile.jpg");
+        StorageReference fileRef = storageReference.child("users/"+ mAuth.getCurrentUser().getUid()+
+                "/profile.jpg");
         fileRef.putFile(imageUri);
+
     }
 }

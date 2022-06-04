@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".ExamenRespuestasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoExamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PreguntasExamenesActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserPageActivity"
             android:exported="false" />
         <activity

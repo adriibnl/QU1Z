@@ -13,7 +13,7 @@ public class ConSQL {
     public Connection conClass() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-         ip = "192.168.1.133";
+         ip = "192.168.1.132";
          port = "1433";
          database = "TFGAndroid";
          uname = "adri";

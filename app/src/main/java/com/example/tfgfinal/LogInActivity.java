@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,17 +20,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 public class LogInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText usernameEt;
     EditText passwordEt;
     Button loginButton;
-    Button signinButton;
+    TextView signinButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
         Intent intent = new Intent(this,SignInActivity.class);
         mAuth = FirebaseAuth.getInstance();
         usernameEt = findViewById(R.id.editTextUsername);

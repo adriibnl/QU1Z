@@ -4,6 +4,7 @@ import com.example.tfgfinal.Connection.ConSQL;
 import com.example.tfgfinal.Models.Cuestionario;
 import com.example.tfgfinal.Models.DDLModel;
 import com.example.tfgfinal.Models.Pregunta;
+import com.example.tfgfinal.Models.PreguntaExamen;
 import com.example.tfgfinal.Models.Respuesta;
 
 import java.sql.Connection;
@@ -107,7 +108,100 @@ public class PreguntasDAO {
     }
 
 //endregion
+    //region Examenes
+public List<PreguntaExamen> GetAllPreguntasExamen() {
+    try {
+        List<PreguntaExamen> lista = null;
 
+        Statement stat = con.createStatement();
+        ResultSet rs = stat.executeQuery("SELECT * FROM PREGUNTASEXAMENES");
+        while (rs.next()) {
+            PreguntaExamen P = new PreguntaExamen();
+            P.Id = rs.getInt(1);
+            P.opciones = rs.getString(2);
+            P.opcionCorrecta = rs.getString(3);
+            P.Enunciado = rs.getString(4);
+            P.IdExamen = rs.getInt(5);
+            lista.add(P);
+        }
+        return lista;
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
+        return null;
+    }
+
+}
+
+    public void AddPreguntaExamen(PreguntaExamen c) {
+        try{
+            PreparedStatement stat = con.prepareStatement("INSERT INTO PREGUNTASEXAMENES" +
+                    "(OPCIONES," +
+                    "OPCIONCORRECTA,ENUNCIADO,IDEXAMEN) VALUES (?,?,?,?)");
+            stat.setString(1,c.opciones);
+            stat.setString(2,c.opcionCorrecta);
+            stat.setString(3,c.Enunciado);
+            stat.setInt(4,c.IdExamen);
+            stat.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public PreguntaExamen GetPreguntaExamenById(int Id) {
+        PreguntaExamen C = new PreguntaExamen();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs = stat.executeQuery("SELECT * FROM PREGUNTASEXAMENES WHERE ID = '" +Id+
+                    "'");
+            C.Id = rs.getInt(1);
+            C.opciones = rs.getString(2);
+            C.opcionCorrecta = rs.getString(3);
+            C.Enunciado = rs.getString(4);
+            C.IdExamen = rs.getInt(5);
+        } catch (SQLException e) {}
+        return C;
+    }
+
+    public List<PreguntaExamen> GetAllPreguntasFromExamen(int id) {
+        try {
+            List<PreguntaExamen> lista = new ArrayList<PreguntaExamen>();
+
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM PREGUNTASEXAMENES where idExamen ='" + id +
+                            "'");
+            while (rs.next()) {
+                PreguntaExamen C = new PreguntaExamen();
+                C.Id = rs.getInt(1);
+                C.opciones = rs.getString(2);
+                C.opcionCorrecta = rs.getString(3);
+                C.Enunciado = rs.getString(4);
+                C.IdExamen = rs.getInt(5);
+                lista.add(C);
+            }
+            return lista;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public boolean CheckPreguntaExamen(PreguntaExamen p) {
+        PreguntaExamen C = new PreguntaExamen();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM PREGUNTASEXAMENES WHERE IDEXAMEN = '" +p.IdExamen+
+                            "'and OPCIONES = '" +p.opciones + "'");
+            if (rs.next()) {
+                return true;
+            }
+            else return false;
+        } catch (SQLException e) {}
+        return true;
+    }
+    //endregion
     //region Tipo de preguntas
     public List<String> GetAllTipoPreguntas() {
         try {

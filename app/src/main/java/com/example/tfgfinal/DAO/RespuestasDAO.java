@@ -2,6 +2,8 @@ package com.example.tfgfinal.DAO;
 
 import com.example.tfgfinal.Connection.ConSQL;
 import com.example.tfgfinal.Models.Cuestionario;
+import com.example.tfgfinal.Models.Examen;
+import com.example.tfgfinal.Models.ExamenRespuesta;
 import com.example.tfgfinal.Models.Pregunta;
 import com.example.tfgfinal.Models.Respuesta;
 
@@ -207,7 +209,112 @@ public class RespuestasDAO {
         }
 
     }
+    //region Examenes
+    public void AddRespuestaExamen(ExamenRespuesta c) {
 
+        try{
+            PreparedStatement stat = con.prepareStatement("INSERT INTO EXAMENRESPUESTAS" +
+                    "(IDEXAMEN," +
+                    "RESPUESTAS,IDUSER,FECHA,PUNTUACION) VALUES (?,?,?,?,?)");
+            stat.setInt(1,c.IdExamen);
+            stat.setString(2,c.respuestas);
+            stat.setInt(3,c.idUser);
+            stat.setString(5,c.puntuacion);
+            stat.setDate(4, (Date) c.fecha);
+            stat.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public ExamenRespuesta GetRespuestasByExamenAndUser(int IdExamen,int IdUser) {
+        ExamenRespuesta C = new ExamenRespuesta();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM EXAMENRESPUESTAS WHERE ID = '" +IdExamen+"' " +
+                            "AND IDUSER ='" +IdUser + "'");
+            C.Id = rs.getInt(1);
+            C.IdExamen = rs.getInt(2);
+            C.respuestas = rs.getString(2);
+            C.idUser   = rs.getInt(4);
+            C.fecha = rs.getDate(5);
+            C.puntuacion = rs.getString(6);
+        } catch (SQLException e) {}
+        return C;
+    }
+
+    public List<ExamenRespuesta> GetAllRespuestasFromExamen(int id) {
+        try {
+            List<ExamenRespuesta> lista = new ArrayList<ExamenRespuesta>();
+
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM EXAMENRESPUESTAS where idExamen ='" + id +
+                            "'");
+            while (rs.next()) {
+                ExamenRespuesta C = new ExamenRespuesta();
+                C.Id = rs.getInt(1);
+                C.IdExamen = rs.getInt(2);
+                C.respuestas = rs.getString(3);
+                C.idUser = rs.getInt(4);
+                C.fecha = rs.getDate(5);
+                C.puntuacion = rs.getString(6);
+                lista.add(C);
+            }
+            return lista;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public ExamenRespuesta GetRespuestaExamenById(int Id) {
+        ExamenRespuesta C = new ExamenRespuesta();
+        try {
+            Statement stat = con.createStatement();
+            ResultSet rs = stat.executeQuery("SELECT * FROM EXAMENRESPUESTAS WHERE ID = '" +Id+"'");
+            rs.next();
+            C.Id = rs.getInt(1);
+            C.IdExamen = rs.getInt(2);
+            C.respuestas = rs.getString(3);
+            C.idUser = rs.getInt(4);
+            C.fecha = rs.getDate(5);
+            C.puntuacion = rs.getString(6);
+        } catch (SQLException e) {}
+        return C;
+    }
+
+    public List<ExamenRespuesta> GetAllRespuestasFromUserExams(int id) {
+        try {
+            List<ExamenRespuesta> lista = new ArrayList<ExamenRespuesta>();
+
+            Statement stat = con.createStatement();
+            ResultSet rs =
+                    stat.executeQuery("SELECT * FROM EXAMENRESPUESTAS inner join Examenes on " +
+                            "ExamenRespuestas.idExamen = Examenes.id " +
+                            "  where Examenes.idcreador ='" + id +
+                            "'");
+            while (rs.next()) {
+                ExamenRespuesta C = new ExamenRespuesta();
+                C.Id = rs.getInt(1);
+                C.IdExamen = rs.getInt(2);
+                C.respuestas = rs.getString(3);
+                C.idUser = rs.getInt(4);
+                C.fecha = rs.getDate(5);
+                C.puntuacion = rs.getString(6);
+                lista.add(C);
+            }
+            return lista;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+    }
+
+    //endregion
 
     //region Tipo de preguntas
     public List<String> GetAllTipoPreguntas() {

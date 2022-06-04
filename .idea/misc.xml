@@ -3,19 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/drawable/border.xml" value="0.2994791666666667" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/drawable/border_fail.xml" value="0.2994791666666667" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/drawable/border_good.xml" value="0.2994791666666667" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_all_cuestionarios.xml" value="0.36666666666666664" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_create.xml" value="0.36666666666666664" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_cuestionario_respuestas_list.xml" value="0.2864583333333333" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_do_cuestionario.xml" value="0.36666666666666664" />
-        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_log_in.xml" value="0.36666666666666664" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_do_exam.xml" value="0.28489583333333335" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_examen_respuestas.xml" value="0.3125" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_log_in.xml" value="0.22" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_mis_cuestionarios.xml" value="0.28802083333333334" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_preguntas.xml" value="0.36666666666666664" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_preguntas_examenes.xml" value="0.3383152173913043" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_sign_in.xml" value="0.20520833333333333" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/activity_user_page.xml" value="0.36666666666666664" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/adapter_examen_respuesta_view_layout.xml" value="0.25" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/adapter_view_layout.xml" value="0.25" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_add_spinner_data.xml" value="0.36666666666666664" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_select_do_qu1z_type.xml" value="0.28177083333333336" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_select_edit_qu1z_type.xml" value="0.20520833333333333" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_select_type.xml" value="0.28489583333333335" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_select_view_qu1z_answer_type.xml" value="0.17831813576494426" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/popup_terms.xml" value="0.3428442028985507" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_pregunta.xml" value="0.36666666666666664" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_respuesta.xml" value="0.36666666666666664" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_respuesta_checkbox.xml" value="0.36666666666666664" />
@@ -24,6 +36,8 @@
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_respuesta_date.xml" value="0.20520833333333333" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_respuesta_edittext.xml" value="0.20520833333333333" />
         <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_add_respuesta_enunciado.xml" value="0.20520833333333333" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_preguntas_examen.xml" value="0.3383152173913043" />
+        <entry key="..\:/CarpetaProyectos/TFGFINAL/app/src/main/res/layout/row_respuesta_examen.xml" value="0.3125" />
       </map>
     </option>
   </component>

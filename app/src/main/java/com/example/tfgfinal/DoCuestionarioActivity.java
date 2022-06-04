@@ -41,6 +41,7 @@ List<Pregunta> listPreguntas;
 ArrayList<Integer> idPreguntas;
 boolean verRespuestas = false;
 int idCuestionario;
+int idUsuarioResuelto;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,14 @@ int idCuestionario;
         layoutlist = findViewById(R.id.layoutRespuestasList);
         Bundle bundle = getIntent().getExtras();
         idCuestionario =getIntent().getExtras().getInt("IdCuestionario");
+        idUsuarioResuelto = getIntent().getExtras().getInt("IdUser");
         mAuth = FirebaseAuth.getInstance();
         int iduser = uDAO.GetUsuarioByUserID(mAuth.getCurrentUser().getUid()).Id;
+
         try {
             verRespuestas = getIntent().getExtras().getBoolean("verRespuestas");
         } catch (Exception e) {}
+        //if (!verRespuestas)
         listPreguntas = pDAO.GetAllPreguntasFromCuestionario(idCuestionario);
         mAuth = FirebaseAuth.getInstance();
         for (Pregunta p:
@@ -76,7 +80,7 @@ int idCuestionario;
                     EditText respuestaET = respuestaViewEt.findViewById(R.id.editTextRespuesta);
                     if (verRespuestas) {
                         try{respuestaET.setEnabled(false);
-                            respuestaET.setText(rDAO.GetRespuestaFromUserAndPregunta(iduser,p.Id).Texto);
+                            respuestaET.setText(rDAO.GetRespuestaFromUserAndPregunta(idUsuarioResuelto,p.Id).Texto);
                         } catch (Exception e) { e.printStackTrace();}
                     }
 
@@ -90,7 +94,7 @@ int idCuestionario;
                     CheckBox respuestaCb = respuestaViewCb.findViewById(R.id.checkBoxRespuesta);
                     if (verRespuestas) {
                         try{respuestaCb.setEnabled(false);
-                            if (rDAO.GetRespuestaFromUserAndPregunta(iduser,p.Id).Texto.equals(
+                            if (rDAO.GetRespuestaFromUserAndPregunta(idUsuarioResuelto,p.Id).Texto.equals(
                                     "true"))
                             {respuestaCb.setChecked(true);}
                             else {respuestaCb.setChecked(false);}
@@ -126,6 +130,12 @@ int idCuestionario;
                             dpd.show();
                         }
                     });
+                    if (verRespuestas) {
+                        try{respuestasDP.setEnabled(false);
+                            respuestasDP.setText(rDAO.GetRespuestaFromUserAndPregunta(idUsuarioResuelto,
+                                    p.Id).Texto);
+                        } catch (Exception e) { e.printStackTrace();}
+                    }
                     if (layoutlist.indexOfChild(respuestaViewDP) != -1) {
                         layoutlist.removeView(respuestaViewDP);
                     }

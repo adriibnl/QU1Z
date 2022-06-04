@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.tfgfinal.DAO.CuestionariosDAO;
 import com.example.tfgfinal.DAO.UsuariosDAO;
 import com.example.tfgfinal.Models.Cuestionario;
+import com.example.tfgfinal.Models.Examen;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class CreateActivity extends AppCompatActivity {
     EditText Descripcion;
     UsuariosDAO usuariosDAO = new UsuariosDAO();
     CuestionariosDAO cuestionariosDAO = new CuestionariosDAO();
+    int Tipo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,21 +33,39 @@ public class CreateActivity extends AppCompatActivity {
         CreateBT = findViewById(R.id.CrearBT);
         Nombre = findViewById(R.id.nameET);
         Descripcion = findViewById(R.id.DesET);
+        Tipo = getIntent().getExtras().getInt("tipo");
+
     }
 
     public void crearCuestionario(View view) {
         String n = Nombre.getText().toString();
         String d = Descripcion.getText().toString();
-        try {
-        Cuestionario c = new Cuestionario();
-        c.IdCreador = usuariosDAO.GetUsuarioByUserID(mAuth.getCurrentUser().getUid().toString()).Id;
-        c.Nombre = n;
-        c.Descripcion = d;
-        c.FechaCreacion = Date.valueOf(LocalDate.now().toString());
-        cuestionariosDAO.AddCuestionario(c);
-        finish();
-        } catch (Exception e)  {
-            Toast.makeText(this,"Error al crear el cuestionario",Toast.LENGTH_SHORT);
+        if (Tipo ==1) {
+            try {
+                Cuestionario c = new Cuestionario();
+                c.IdCreador = usuariosDAO.GetUsuarioByUserID(mAuth.getCurrentUser().getUid().toString()).Id;
+                c.Nombre = n;
+                c.Descripcion = d;
+                c.FechaCreacion = Date.valueOf(LocalDate.now().toString());
+                cuestionariosDAO.AddCuestionario(c);
+                finish();
+            } catch (Exception e)  {
+                Toast.makeText(this,"Error al crear el cuestionario",Toast.LENGTH_SHORT);
+            }
         }
+        if (Tipo ==2) {
+            try {
+                Examen c = new Examen();
+                c.IdCreador = usuariosDAO.GetUsuarioByUserID(mAuth.getCurrentUser().getUid().toString()).Id;
+                c.Nombre = n;
+                c.Descripcion = d;
+                c.FechaCreacion = Date.valueOf(LocalDate.now().toString());
+                cuestionariosDAO.AddExamen(c);
+                finish();
+            } catch (Exception e)  {
+                Toast.makeText(this,"Error al crear el examen",Toast.LENGTH_SHORT);
+            }
+        }
+
     }
 }
